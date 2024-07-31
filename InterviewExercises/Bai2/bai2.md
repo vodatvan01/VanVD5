@@ -18,15 +18,23 @@ Trong đó:
 Ví dụ : so sánh khuôn mặt
 ![alt text](image.png)
 
+### Triplet Loss
+
 Giả sử không có \( \alpha \). Mong muốn là \(\|f(A) - f(P)\|_2^2 \leq \|f(A) - f(N)\|_2^2\), nhưng nếu \(\|f(A) - f(P)\|_2^2 = 0.5\) và \(\|f(A) - f(N)\|_2^2 = 0.51\), thì khi đó:
 
 \[
 \max \left(0, \|f(A) - f(P)\|_2^2 - \|f(A) - f(N)\|_2^2 \right) = \max\left(0, 0.5 - 0.51\right) = \max\left(0, -0.01\right) = 0
 \]
 
-Khi hàm mất mát bằng 0, điều này có thể dẫn đến việc mô hình không học được gì nhiều.
+Khi hàm mất mát bằng 0, điều này có thể dẫn đến việc mô hình không học được gì nhiều. 
 
-vậy khi thêm \( \alpha \) = 0.2 thì kết quả là \(\max\left(0, 0.19\right)\) = 0.19 khi đó mô hình có thể học thêm được.
+Vậy khi thêm \( \alpha = 0.2 \), kết quả là:
+
+\[
+\max\left(0, \|f(A) - f(P)\|_2^2 - \|f(A) - f(N)\|_2^2 + \alpha \right) = \max\left(0, 0.5 - 0.51 + 0.2\right) = \max\left(0, 0.19\right) = 0.19
+\]
+
+Khi đó, mô hình có thể học thêm được.
 
 ### Công thức toán học Triplet Loss với nhiều mẫu Positive và Negatives
 
